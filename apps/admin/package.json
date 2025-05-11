@@ -1,8 +1,0 @@
-{
-  "name": "@softgames/admin",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start:dev": "npx nx run @softgames/admin:serve"
-  }
-}
