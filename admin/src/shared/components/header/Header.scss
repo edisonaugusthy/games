@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  gap: 3rem;
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  .content-container {
+    display: flex;
+  }
+}
