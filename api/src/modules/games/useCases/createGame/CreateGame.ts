@@ -8,6 +8,7 @@ import { GamePublisherName } from '../../domain/gamePublisher';
 import { Game, GameType } from '../../domain/game';
 import { Guard } from '../../../../shared/core/Guard';
 import { IGameRepo } from '../../repos/gameRepo';
+import { UniqueEntityID } from '../../../../shared/domain/UniqueEntityID';
 
 type Response = Either<
   | CreateGameErrors.GameAlreadyExistsError
@@ -43,15 +44,18 @@ export class CreateGameUseCase implements UseCase<CreateGameDTO[], Promise<Respo
       if (gameAlreadyExists) {
         return left(new CreateGameErrors.GameAlreadyExistsError(name.value)) as Response;
       }
-      const gameOrError: Result<Game> = Game.create({
-        name,
-        releaseYear: new Date(),
-        players: game.players,
-        expansions: game.expansions,
-        publisher,
-        type: game.type,
-        isDeleted: false
-      });
+      const gameOrError: Result<Game> = Game.create(
+        {
+          name,
+          releaseYear: new Date(),
+          players: game.players,
+          expansions: game.expansions ?? null,
+          publisher: publisher ?? null,
+          type: game.type,
+          isDeleted: false
+        },
+        new UniqueEntityID(game.id)
+      );
       if (gameOrError.isFailure) {
         return left(Result.fail<Game>(gameOrError.getErrorValue().toString())) as Response;
       }
