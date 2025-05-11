@@ -3,8 +3,8 @@ import { Mapper } from '../../../shared/infra/Mapper';
 import { Game } from '../domain/game';
 import { GameName } from '../domain/gameName';
 import { GamePublisherName } from '../domain/gamePublisher';
-import { GameDTO } from '../dtos/gameDTO';
 import { Timestamp } from 'firebase/firestore';
+import { GameDTO } from '../dtos/GameDTO';
 
 export class GameMap implements Mapper<Game> {
   public static async toPersistence(game: Game): Promise<any> {
