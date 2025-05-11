@@ -2,12 +2,12 @@ import React from 'react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import './App.scss';
-import IndexPage from './pages/index';
+import GamePage from './pages/Games';
 
 let router = createBrowserRouter([
   {
     path: '/',
-    Component: IndexPage
+    Component: GamePage
   }
 ]);
 

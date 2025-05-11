@@ -5,7 +5,7 @@ const devApiConfig = {
 };
 
 const prodApiConfig = {
-  baseUrl: ''
+  baseUrl: 'http://localhost:5001/api/v1'
 };
 
 const apiConfig = isProduction ? prodApiConfig : devApiConfig;
