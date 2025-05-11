@@ -1,9 +1,8 @@
-import { CreateGameController } from './CreateGameController';
-import { CreateGameUseCase } from './CreateGameUseCase';
+import { CreateGameController } from "./CreateGameController";
+import { CreateGameUseCase } from "./CreateGameUseCase";
 
-// import { userRepo } from '../../repos';
-// const createGameUseCase = new CreateGameUseCase(userRepo);
-const createGameUseCase = new CreateGameUseCase();
+import { gameRepo } from "../../repos";
+const createGameUseCase = new CreateGameUseCase(gameRepo);
 const createGameController = new CreateGameController(createGameUseCase);
 
 export { createGameUseCase, createGameController };

@@ -1,8 +1,8 @@
-import { DeleteUserController } from './DeleteGameController';
-import { DeleteGameUseCase } from './DeleteGameUseCase';
+import { DeleteUserController } from "./DeleteGameController";
+import { DeleteGameUseCase } from "./DeleteGameUseCase";
 
-// import { userRepo } from '../../repos';
-// const createGameUseCase = new CreateGameUseCase(userRepo);
+// import { gameRepo } from '../../repos';
+// const createGameUseCase = new CreateGameUseCase(gameRepo);
 const deleteGameUseCase = new DeleteGameUseCase();
 const deleteGameController = new DeleteUserController(deleteGameUseCase);
 

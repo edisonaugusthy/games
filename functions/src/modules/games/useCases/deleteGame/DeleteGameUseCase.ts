@@ -1,9 +1,8 @@
-import { Either, Result, left, right } from '../../../../shared/core/Result';
-import { AppError } from '../../../../shared/core/AppError';
-
-import { UseCase } from '../../../../shared/core/UseCase';
-import { DeleteGameDTO } from './DeleteGameDTO';
-import { DeleteGameErrors } from './DeleteGameErrors';
+import { Either, Result, left, right } from "../../../../shared/core/Result";
+import { AppError } from "../../../../shared/core/AppError";
+import { UseCase } from "../../../../shared/core/UseCase";
+import { DeleteGameDTO } from "./DeleteGameDTO";
+import { DeleteGameErrors } from "./DeleteGameErrors";
 
 type Response = Either<
   AppError.UnexpectedError | DeleteGameErrors.GameNotFoundError,
@@ -13,25 +12,25 @@ type Response = Either<
 export class DeleteGameUseCase
   implements UseCase<DeleteGameDTO, Promise<Response>>
 {
-  // private userRepo: IUserRepo;
+  // private gameRepo: IGameRepo;
 
-  // constructor(userRepo: IUserRepo) {
-  //   this.userRepo = userRepo;
+  // constructor(gameRepo: IGameRepo) {
+  //   this.gameRepo = gameRepo;
   // }
 
   public async execute(request: DeleteGameDTO): Promise<any> {
     try {
       const game = null;
-      // const user = await this.userRepo.getUserByUserId(request.gameId);
+      // const user = await this.gameRepo.getUserByUserId(request.gameId);
       const gameFound = !!game;
 
       if (!gameFound) {
-        return left(new DeleteGameErrors.GameNotFoundError('tes'));
+        return left(new DeleteGameErrors.GameNotFoundError("tes"));
       }
 
       // user.delete();
 
-      // await this.userRepo.save(user);
+      // await this.gameRepo.save(user);
 
       return right(Result.ok<void>());
     } catch (err) {

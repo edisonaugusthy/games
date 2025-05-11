@@ -1,12 +1,13 @@
-import { Either, Result, left, right } from '../../../../shared/core/Result';
-import { AppError } from '../../../../shared/core/AppError';
-import { UseCase } from '../../../../shared/core/UseCase';
-import { CreateGameErrors } from './CreateGameErrors';
-import { CreateGameDTO } from './CreateGameDTO';
-import { GameName } from '../../domain/gameName';
-import { GamePublisherName } from '../../domain/gamePublisher';
-import { Game, GameType } from '../../domain/game';
-import { Guard } from '../../../../shared/core/Guard';
+import { Either, Result, left, right } from "../../../../shared/core/Result";
+import { AppError } from "../../../../shared/core/AppError";
+import { UseCase } from "../../../../shared/core/UseCase";
+import { CreateGameErrors } from "./CreateGameErrors";
+import { CreateGameDTO } from "./CreateGameDTO";
+import { GameName } from "../../domain/gameName";
+import { GamePublisherName } from "../../domain/gamePublisher";
+import { Game, GameType } from "../../domain/game";
+import { Guard } from "../../../../shared/core/Guard";
+import { IGameRepo } from "../../repos/gameRepo";
 
 type Response = Either<
   | CreateGameErrors.GameAlreadyExistsError
@@ -19,11 +20,11 @@ type Response = Either<
 export class CreateGameUseCase
   implements UseCase<CreateGameDTO, Promise<Response>>
 {
-  //   private userRepo: IUserRepo;
+  private gameRepo: IGameRepo;
 
-  //   constructor(userRepo: IUserRepo) {
-  //     this.userRepo = userRepo;
-  //   }
+  constructor(userRepo: IGameRepo) {
+    this.gameRepo = userRepo;
+  }
 
   async execute(request: CreateGameDTO): Promise<Response> {
     const nameOrError = GameName.create({ name: request.name });
@@ -33,43 +34,27 @@ export class CreateGameUseCase
     const gameTypeOrError = Guard.isOneOf(
       request.type,
       [GameType.BaseGame, GameType.Expansion],
-      'GameType'
+      "GameType"
     );
     const dtoResult = Result.combine([
       nameOrError,
       publisherOrError,
       gameTypeOrError,
     ]);
-
     if (dtoResult.isFailure) {
       return left(Result.fail<void>(dtoResult.getErrorValue())) as Response;
     }
-
     const name: GameName = nameOrError.getValue();
     const publisher: GamePublisherName = publisherOrError.getValue();
 
     try {
-      const userAlreadyExists = false; //await this.userRepo.exists(name);
+      const gameAlreadyExists = await this.gameRepo.exists(name);
 
-      if (userAlreadyExists) {
+      if (gameAlreadyExists) {
         return left(
           new CreateGameErrors.GameAlreadyExistsError(name.value)
         ) as Response;
       }
-
-      try {
-        const alreadyCreatedUserByUserName = 'q';
-        //await this.userRepo.getUserByUserName(publisher);
-
-        const userNameTaken = !!alreadyCreatedUserByUserName === true;
-
-        if (userNameTaken) {
-          return left(
-            new CreateGameErrors.GameNameAlreadyTakenError(publisher.value)
-          ) as Response;
-        }
-      } catch (err) {}
-
       const userOrError: Result<Game> = Game.create({
         name,
         releaseYear: new Date(),
@@ -77,16 +62,13 @@ export class CreateGameUseCase
         type: request.type,
         isDeleted: false,
       });
-
       if (userOrError.isFailure) {
         return left(
           Result.fail<Game>(userOrError.getErrorValue().toString())
         ) as Response;
       }
-
       const game: Game = userOrError.getValue();
-
-      // await this.userRepo.save(game);
+      await this.gameRepo.save(game);
 
       return right(Result.ok<Game>(game));
     } catch (err) {
