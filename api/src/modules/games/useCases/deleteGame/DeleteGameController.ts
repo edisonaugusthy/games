@@ -1,7 +1,7 @@
 import { DeleteGameErrors } from './DeleteGameErrors';
 import { BaseController } from '../../../../shared/infra/http/models/BaseController';
 import * as express from 'express';
-import { DeleteGameUseCase } from './DeleteGameUseCase';
+import { DeleteGameUseCase } from './DeleteGame';
 import { DeleteGameDTO } from './DeleteGameDTO';
 
 export class DeleteGameController extends BaseController {

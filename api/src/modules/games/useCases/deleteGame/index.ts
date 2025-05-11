@@ -1,5 +1,5 @@
 import { DeleteGameController } from './DeleteGameController';
-import { DeleteGameUseCase } from './DeleteGameUseCase';
+import { DeleteGameUseCase } from './DeleteGame';
 
 // import { gameRepo } from '../../repos';
 // const createGameUseCase = new CreateGameUseCase(gameRepo);

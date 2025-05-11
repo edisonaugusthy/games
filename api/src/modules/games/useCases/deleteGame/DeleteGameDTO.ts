@@ -1,3 +1,3 @@
 export interface DeleteGameDTO {
-  gameId: number;
+  gameId: string;
 }

@@ -58,6 +58,22 @@ export class Game extends AggregateRoot<GameProps> {
   get isDeleted(): boolean | undefined {
     return this.props.isDeleted;
   }
+
+  public updateName(name: GameName) {
+    this.props.name = name;
+  }
+  public updateType(type: GameType) {
+    this.props.type = type;
+  }
+  public updatePublisher(publisher: GamePublisherName) {
+    this.props.publisher = publisher;
+  }
+
+  public delete() {
+    if (!this.props.isDeleted) {
+      this.props.isDeleted = true;
+    }
+  }
   private constructor(props: GameProps, id?: UniqueEntityID) {
     super(props, id);
   }

@@ -1,6 +1,6 @@
 import { BaseController } from '../../../../shared/infra/http/models/BaseController';
 import * as express from 'express';
-import { GetAllGamesUseCase } from './GetAllGamesUseCase';
+import { GetAllGamesUseCase } from './GetAllGames';
 import { GameMap } from '../../mappers/gameMap';
 import { GetAllGamesResponseDTO } from './GetAllGamesResponseDTO';
 

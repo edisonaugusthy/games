@@ -1,11 +1,11 @@
 import { UseCaseError } from '../../../../shared/core/UseCaseError';
 import { Result } from '../../../../shared/core/Result';
 
-export namespace DeleteGameErrors {
+export namespace EditGameErrors {
   export class GameNotFoundError extends Result<UseCaseError> {
-    constructor(id: string) {
+    constructor(name: string) {
       super(false, {
-        message: `The id ${id} doesn't exists`
+        message: `The game ${name} already exists`
       } as UseCaseError);
     }
   }

@@ -3,7 +3,8 @@ import { GameName } from '../../domain/gameName';
 import { Game } from '../../domain/game';
 import { GameMap } from '../../mappers/gameMap';
 import { filestoreDb } from '../../../../shared/infra/database/firebase/config/config';
-import { collection, doc, getDocs, query, where, writeBatch } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where, writeBatch } from 'firebase/firestore';
+import { GameId } from '../../domain/gameId';
 
 export class FirebaseGameRepo implements IGameRepo {
   private readonly collectionName = 'Games';
@@ -37,5 +38,36 @@ export class FirebaseGameRepo implements IGameRepo {
     });
 
     return games;
+  }
+
+  async getOneById(gameId: GameId): Promise<Game> {
+    const collectionRef = collection(filestoreDb, this.collectionName);
+    const q = query(collectionRef, where('id', '==', gameId.getValue().toString()));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      throw new Error(`Game with id ${gameId.getValue()} not found`);
+    }
+    const gameDoc = querySnapshot.docs[0];
+    const game = GameMap.toDomain(gameDoc.data());
+
+    return game;
+  }
+
+  async updateOneById(game: Game): Promise<void> {
+    const gameId = game.id.toString();
+    const persistedGame = await GameMap.toPersistence(game);
+    const gameDocRef = doc(filestoreDb, this.collectionName, gameId);
+    const docSnap = await getDoc(gameDocRef);
+    if (!docSnap.exists()) {
+      throw new Error(`Cannot update game with ID ${gameId}: Document does not exist`);
+    }
+    await updateDoc(gameDocRef, persistedGame);
+  }
+
+  async deleteById(gameId: GameId): Promise<void> {
+    const gameIdString = gameId.getValue().toString();
+    const gameDocRef = doc(filestoreDb, this.collectionName, gameIdString);
+    await deleteDoc(gameDocRef);
+    return;
   }
 }

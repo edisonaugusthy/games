@@ -1,4 +1,4 @@
-import { CreateGameUseCase } from './CreateGameUseCase';
+import { CreateGameUseCase } from './CreateGame';
 import { CreateGameDTO } from './CreateGameDTO';
 import { BaseController } from '../../../../shared/infra/http/models/BaseController';
 import { TextUtils } from '../../../../shared/utils/TextUtils';

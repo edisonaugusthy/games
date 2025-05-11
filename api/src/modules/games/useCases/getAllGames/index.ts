@@ -1,5 +1,5 @@
 import { GetAllGamesController } from './GetAllGamesController';
-import { GetAllGamesUseCase } from './GetAllGamesUseCase';
+import { GetAllGamesUseCase } from './GetAllGames';
 import { gameRepo } from '../../repos';
 
 const getAllGameUseCase = new GetAllGamesUseCase(gameRepo);
