@@ -4,7 +4,7 @@ import * as express from 'express';
 import { DeleteGameUseCase } from './DeleteGameUseCase';
 import { DeleteGameDTO } from './DeleteGameDTO';
 
-export class DeleteUserController extends BaseController {
+export class DeleteGameController extends BaseController {
   private useCase: DeleteGameUseCase;
 
   constructor(useCase: DeleteGameUseCase) {
