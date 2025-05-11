@@ -2,7 +2,10 @@
   "name": "@softgames/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "api": " npm run api",
+    "ui": "npm run ui"
+  },
   "private": true,
   "dependencies": {
     "@nx/nest": "^21.0.3",
