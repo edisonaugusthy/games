@@ -1,5 +1,5 @@
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore } from 'firebase-admin/firestore';
 
 const db = getFirestore();
-const Games = db.collection("Games");
-export default Games;
+const gamesCollection = db.collection('Games');
+export { gamesCollection, db };

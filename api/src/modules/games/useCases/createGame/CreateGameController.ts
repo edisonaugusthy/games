@@ -15,16 +15,17 @@ export class CreateGameController extends BaseController {
   }
 
   async executeImpl(req: express.Request, res: express.Response): Promise<any> {
-    let dto: CreateGameDTO = req.body as CreateGameDTO;
-
-    dto = {
-      name: TextUtils.sanitize(dto.name),
-      publisher: TextUtils.sanitize(dto.publisher),
-      ...req.body,
-    };
+    let dto: CreateGameDTO[] = req.body as CreateGameDTO[];
+    const sanitizedValues = dto.map(game => {
+      return {
+        name: TextUtils.sanitize(game.name),
+        publisher: TextUtils.sanitize(game.publisher),
+        ...req.body
+      };
+    });
 
     try {
-      const result = await this.useCase.execute(dto);
+      const result = await this.useCase.execute(sanitizedValues);
 
       if (result.isLeft()) {
         const error = result.value;

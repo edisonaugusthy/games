@@ -1,6 +1,6 @@
-import Games from "../../../shared/infra/database/firebase/models/Game";
-import { FirebaseGameRepo } from "./implementations/firebaseGameRepo";
+import { gamesCollection } from '../../../shared/infra/database/firebase/models/Game';
+import { FirebaseGameRepo } from './implementations/firebaseGameRepo';
 
-const gameRepo = new FirebaseGameRepo(Games);
+const gameRepo = new FirebaseGameRepo(gamesCollection);
 
 export { gameRepo };

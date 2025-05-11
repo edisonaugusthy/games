@@ -1,7 +1,7 @@
-import { Game } from "../domain/game";
-import { GameName } from "../domain/gameName";
+import { Game } from '../domain/game';
+import { GameName } from '../domain/gameName';
 
 export interface IGameRepo {
   exists(gameName: GameName): Promise<boolean>;
-  save(game: Game): Promise<void>;
+  bulkSave(games: Game[]): Promise<void>;
 }
