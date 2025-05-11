@@ -16,33 +16,36 @@ export class CreateGameController extends BaseController {
 
   async executeImpl(req: express.Request, res: express.Response): Promise<any> {
     let dto: CreateGameDTO[] = req.body as CreateGameDTO[];
-    const sanitizedValues = dto.map(game => {
-      return {
-        name: TextUtils.sanitize(game.name),
-        publisher: TextUtils.sanitize(game.publisher),
-        ...req.body
-      };
-    });
+    if (dto?.length > 0) {
+      const sanitizedValues = dto.map(game => {
+        return {
+          ...game,
+          name: TextUtils.sanitize(game.name),
+          publisher: TextUtils.sanitize(game.publisher)
+        };
+      });
 
-    try {
-      const result = await this.useCase.execute(sanitizedValues);
+      try {
+        const result = await this.useCase.execute(sanitizedValues);
 
-      if (result.isLeft()) {
-        const error = result.value;
-
-        switch (error.constructor) {
-          case CreateGameErrors.GameAlreadyExistsError:
-            return this.conflict(res, error.getErrorValue().message);
-          case CreateGameErrors.GameNameAlreadyTakenError:
-            return this.conflict(res, error.getErrorValue().message);
-          default:
-            return this.fail(res, error.getErrorValue().message);
+        if (result.isLeft()) {
+          const error = result.value;
+          switch (error.constructor) {
+            case CreateGameErrors.GameAlreadyExistsError:
+              return this.conflict(res, error.getErrorValue().message);
+            case CreateGameErrors.GameNameAlreadyTakenError:
+              return this.conflict(res, error.getErrorValue().message);
+            default:
+              return this.fail(res, error.getValue());
+          }
+        } else {
+          return this.ok(res);
         }
-      } else {
-        return this.ok(res);
+      } catch (err) {
+        return this.fail(res, err as string);
       }
-    } catch (err) {
-      return this.fail(res, err as string);
+    } else {
+      return this.fail(res, 'Please provide valid data');
     }
   }
 }

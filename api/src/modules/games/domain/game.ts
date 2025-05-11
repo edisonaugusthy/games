@@ -9,7 +9,7 @@ import { GameCreated } from './events/gameCreated';
 
 export enum GameType {
   BaseGame = 'BaseGame',
-  Expansion = 'Expansion',
+  Expansion = 'Expansion'
 }
 
 export interface PlayersRange {
@@ -65,7 +65,7 @@ export class Game extends AggregateRoot<GameProps> {
   public static create(props: GameProps, id?: UniqueEntityID): Result<Game> {
     const guardResult = Guard.againstNullOrUndefinedBulk([
       { argument: props.name, argumentName: 'gameName' },
-      { argument: props.publisher, argumentName: 'publisher' },
+      { argument: props.publisher, argumentName: 'publisher' }
     ]);
 
     if (guardResult.isFailure) {
@@ -76,7 +76,7 @@ export class Game extends AggregateRoot<GameProps> {
     const user = new Game(
       {
         ...props,
-        isDeleted: props.isDeleted ? props.isDeleted : false,
+        isDeleted: props.isDeleted ? props.isDeleted : false
       },
       id
     );

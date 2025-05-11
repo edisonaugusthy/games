@@ -1,15 +1,27 @@
-import { App, initializeApp } from "firebase-admin/app";
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { Firestore, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDvLGWik43ioQ5-WOYYTIg9U6TZpv8PZvQ",
-  authDomain: "smartbabe-41813.firebaseapp.com",
-  databaseURL: "https://smartbabe-41813.firebaseio.com",
-  projectId: "smartbabe-41813",
-  storageBucket: "smartbabe-41813.firebasestorage.app",
-  messagingSenderId: "995932226625",
-  appId: "1:995932226625:web:c8eb8a08f9399f220f72c0",
+  apiKey: 'AIzaSyDJ58Me_eVPmDy-IGGQqNoxOl1v-bDuZq4',
+  authDomain: 'fir-project-288ad.firebaseapp.com',
+  projectId: 'fir-project-288ad',
+  storageBucket: 'fir-project-288ad.firebasestorage.app',
+  messagingSenderId: '277843026623',
+  appId: '1:277843026623:web:19619bf5412d36db499c0a',
+  measurementId: 'G-WCZDDR7K9L'
 };
 
-const app: App = initializeApp(firebaseConfig);
+let app: FirebaseApp;
+let filestoreDb: Firestore;
+const initializeFirebase = () => {
+  try {
+    app = initializeApp(firebaseConfig);
+    filestoreDb = getFirestore();
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-export { app };
+const getFirebaseApp = () => app;
+
+export { initializeFirebase, getFirebaseApp, filestoreDb };

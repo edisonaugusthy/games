@@ -7,7 +7,7 @@ interface GamePublisherNameProps {
 }
 
 export class GamePublisherName extends ValueObject<GamePublisherNameProps> {
-  public static maxLength: number = 10;
+  public static maxLength: number = 100;
   public static minLength: number = 2;
 
   get value(): string {
@@ -18,17 +18,10 @@ export class GamePublisherName extends ValueObject<GamePublisherNameProps> {
     super(props);
   }
 
-  public static create(
-    props: GamePublisherNameProps
-  ): Result<GamePublisherName> {
-    const publisherNameResult = Guard.againstNullOrUndefined(
-      props.name,
-      'publisherName'
-    );
+  public static create(props: GamePublisherNameProps): Result<GamePublisherName> {
+    const publisherNameResult = Guard.againstNullOrUndefined(props.name, 'publisherName');
     if (publisherNameResult.isFailure) {
-      return Result.fail<GamePublisherName>(
-        publisherNameResult.getErrorValue()
-      );
+      return Result.fail<GamePublisherName>(publisherNameResult.getErrorValue());
     }
 
     const minLengthResult = Guard.againstAtLeast(this.minLength, props.name);

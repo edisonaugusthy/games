@@ -6,6 +6,7 @@ export interface CreateGameDTO {
   type: GameType;
   publisher: string;
   standalone: boolean;
+  expansions: string[];
   baseGame: number;
   players: PlayersRange;
 }

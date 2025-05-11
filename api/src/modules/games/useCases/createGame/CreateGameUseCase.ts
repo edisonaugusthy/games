@@ -46,6 +46,8 @@ export class CreateGameUseCase implements UseCase<CreateGameDTO[], Promise<Respo
       const gameOrError: Result<Game> = Game.create({
         name,
         releaseYear: new Date(),
+        players: game.players,
+        expansions: game.expansions,
         publisher,
         type: game.type,
         isDeleted: false

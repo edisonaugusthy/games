@@ -8,7 +8,7 @@ interface GameNameProps {
 
 export class GameName extends ValueObject<GameNameProps> {
   public static maxLength: number = 100;
-  public static minLength: number = 2;
+  public static minLength: number = 1;
 
   get value(): string {
     return this.props.name;
@@ -23,7 +23,6 @@ export class GameName extends ValueObject<GameNameProps> {
     if (gameNameResult.isFailure) {
       return Result.fail<GameName>(gameNameResult.getErrorValue());
     }
-
     const minLengthResult = Guard.againstAtLeast(this.minLength, props.name);
     if (minLengthResult.isFailure) {
       return Result.fail<GameName>(minLengthResult.getErrorValue());

@@ -1,31 +1,24 @@
 import { IGameRepo } from '../gameRepo';
-import { gamesCollection, db } from './../../../../shared/infra/database/firebase/models/Game';
 import { GameName } from '../../domain/gameName';
 import { Game } from '../../domain/game';
 import { GameMap } from '../../mappers/gameMap';
+import { filestoreDb } from '../../../../shared/infra/database/firebase/config/config';
+import { collection, doc, getDocs, query, where, writeBatch } from 'firebase/firestore';
 
 export class FirebaseGameRepo implements IGameRepo {
-  private models: typeof gamesCollection;
-
-  constructor(models: typeof gamesCollection) {
-    this.models = models;
-  }
-
   async exists(gameName: GameName): Promise<boolean> {
-    const nameRef = await this.models.where('name', '==', gameName.value).get();
-    if (nameRef.size > 0) {
-      return true;
-    } else {
-      return false;
-    }
+    const collectionRef = collection(filestoreDb, 'Games');
+    const q = query(collectionRef, where('name', '==', gameName.value));
+    const docs = await getDocs(q);
+    return docs.size > 0;
   }
 
   async bulkSave(games: Game[]): Promise<void> {
-    const batch = db.batch();
-    for (let i = 0; i < games.length; i++) {
-      const game = await GameMap.toPersistence(games[i]);
-      const gameRef = db.collection('Games').doc(game.id);
-      batch.set(gameRef, game);
+    const batch = writeBatch(filestoreDb);
+    for (const game of games) {
+      const persistedGame = await GameMap.toPersistence(game);
+      const docRef = doc(filestoreDb, 'Games', persistedGame.id);
+      batch.set(docRef, persistedGame);
     }
     await batch.commit();
     return;
