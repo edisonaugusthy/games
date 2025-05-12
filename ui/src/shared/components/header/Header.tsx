@@ -17,7 +17,6 @@ const Header: React.FC<HeaderProps> = props => (
     <Col span={8}>
       <div className="title-container">
         <h3 className="title">{props.title}</h3>
-        <h6 className="sub-title">{props.subtitle}</h6>
       </div>
     </Col>
   </Row>
