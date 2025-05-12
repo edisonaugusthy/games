@@ -2,6 +2,7 @@
 
 - Microservice ready architecture with Domain Driven Design Principles
 - Separation between layers which enable make future changes easily
+- Swr package for efficient data fetching
 
 #### Feature that could be added(missed due to time constraints)
 
@@ -16,6 +17,7 @@
 - Better validations on UI and Backend
 - Better use of cloud functions and its rules
 - Better handling of the environment variables
+- Class and Usecase diagrams
 
 ## Documentation
 
