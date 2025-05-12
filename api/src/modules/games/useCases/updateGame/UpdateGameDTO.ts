@@ -1,7 +1,7 @@
 import { GameType } from '../../domain/game';
 
 export interface UpdateGameDTO {
-  id: string;
+  gameId: string;
   name: string;
   type: GameType;
   publisher: string;

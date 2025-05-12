@@ -5,7 +5,7 @@ export namespace EditGameErrors {
   export class GameNotFoundError extends Result<UseCaseError> {
     constructor(name: string) {
       super(false, {
-        message: `The game ${name} already exists`
+        message: `The game ${name} not exists`
       } as UseCaseError);
     }
   }

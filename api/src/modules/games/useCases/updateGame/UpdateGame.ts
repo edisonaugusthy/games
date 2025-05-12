@@ -22,7 +22,7 @@ export class UpdateGameUseCase implements UseCase<UpdateGameDTO, Promise<Respons
   async execute(request: UpdateGameDTO): Promise<Response> {
     let game: Game;
     try {
-      const idOrError = GameId.create(new UniqueEntityID(request.id)).getValue();
+      const idOrError = GameId.create(new UniqueEntityID(request.gameId)).getValue();
       game = await this.gameRepo.getOneById(idOrError);
     } catch (err) {
       return left(new EditGameErrors.GameNotFoundError(request.name));
@@ -41,7 +41,7 @@ export class UpdateGameUseCase implements UseCase<UpdateGameDTO, Promise<Respons
     const name: GameName = nameOrError.getValue();
     const publisher: GamePublisherName = publisherOrError.getValue();
     game.updateName(name);
-    game.updateType(gameTypeOrError.getValue() as GameType);
+    game.updateType(request.type as GameType);
     game.updatePublisher(publisher);
     try {
       await this.gameRepo.updateOneById(game);
