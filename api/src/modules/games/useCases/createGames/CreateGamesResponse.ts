@@ -1,12 +1,13 @@
 import { Either, Result } from '../../../../shared/core/Result';
 
 import { AppError } from '../../../../shared/core/AppError';
-import { CreateGameErrors } from './CreateGameErrors';
+import { CreateGameErrors } from './CreateGamesErrors';
+import { Game } from '../../domain/game';
 
-export type CreateGameResponse = Either<
+export type CreateGamesResponse = Either<
   | CreateGameErrors.GameAlreadyExistsError
   | CreateGameErrors.GameNameAlreadyTakenError
   | AppError.UnexpectedError
   | Result<any>,
-  Result<void>
+  Result<Game[]>
 >;

@@ -1,6 +1,6 @@
 import { GameType, PlayersRange } from '../../domain/game';
 
-export interface CreateGameDTO {
+export interface CreateGamesDTO {
   id: string;
   name: string;
   year: string;

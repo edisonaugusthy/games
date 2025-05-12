@@ -1,31 +1,24 @@
-import { Either, Result, left, right } from '../../../../shared/core/Result';
+import { Result, left, right } from '../../../../shared/core/Result';
 import { AppError } from '../../../../shared/core/AppError';
 import { UseCase } from '../../../../shared/core/UseCase';
-import { CreateGameErrors } from './CreateGameErrors';
-import { CreateGameDTO } from './CreateGameDTO';
+import { CreateGameErrors } from './CreateGamesErrors';
+import { CreateGamesDTO } from './CreateGamesDTO';
 import { GameName } from '../../domain/gameName';
 import { GamePublisherName } from '../../domain/gamePublisher';
 import { Game, GameType } from '../../domain/game';
 import { Guard } from '../../../../shared/core/Guard';
 import { IGameRepo } from '../../repos/gameRepo';
 import { UniqueEntityID } from '../../../../shared/domain/UniqueEntityID';
+import { CreateGamesResponse } from './CreateGamesResponse';
 
-type Response = Either<
-  | CreateGameErrors.GameAlreadyExistsError
-  | CreateGameErrors.GameNameAlreadyTakenError
-  | AppError.UnexpectedError
-  | Result<any>,
-  Result<Game[]>
->;
-
-export class CreateGameUseCase implements UseCase<CreateGameDTO[], Promise<Response>> {
+export class CreateGamesUseCase implements UseCase<CreateGamesDTO[], Promise<CreateGamesResponse>> {
   private gameRepo: IGameRepo;
   private games: Game[] = [];
   constructor(userRepo: IGameRepo) {
     this.gameRepo = userRepo;
   }
 
-  async execute(request: CreateGameDTO[]): Promise<Response> {
+  async execute(request: CreateGamesDTO[]): Promise<CreateGamesResponse> {
     for (let i = 0; i < request.length; i++) {
       const game = request[i];
       const nameOrError = GameName.create({ name: game.name });
@@ -35,14 +28,14 @@ export class CreateGameUseCase implements UseCase<CreateGameDTO[], Promise<Respo
       const gameTypeOrError = Guard.isOneOf(game.type, [GameType.BaseGame, GameType.Expansion], 'GameType');
       const dtoResult = Result.combine([nameOrError, publisherOrError, gameTypeOrError]);
       if (dtoResult.isFailure) {
-        return left(Result.fail<void>(dtoResult.getErrorValue())) as Response;
+        return left(Result.fail<void>(dtoResult.getErrorValue())) as CreateGamesResponse;
       }
       const name: GameName = nameOrError.getValue();
       const publisher: GamePublisherName = publisherOrError.getValue();
       const gameAlreadyExists = await this.gameRepo.exists(name);
 
       if (gameAlreadyExists) {
-        return left(new CreateGameErrors.GameAlreadyExistsError(name.value)) as Response;
+        return left(new CreateGameErrors.GameAlreadyExistsError(name.value)) as CreateGamesResponse;
       }
       const gameOrError: Result<Game> = Game.create(
         {
@@ -57,7 +50,7 @@ export class CreateGameUseCase implements UseCase<CreateGameDTO[], Promise<Respo
         new UniqueEntityID(game.id)
       );
       if (gameOrError.isFailure) {
-        return left(Result.fail<Game>(gameOrError.getErrorValue().toString())) as Response;
+        return left(Result.fail<Game>(gameOrError.getErrorValue().toString())) as CreateGamesResponse;
       }
       this.games.push(gameOrError.getValue());
     }
@@ -67,7 +60,7 @@ export class CreateGameUseCase implements UseCase<CreateGameDTO[], Promise<Respo
 
       return right(Result.ok<Game[]>(this.games));
     } catch (err) {
-      return left(new AppError.UnexpectedError(err)) as Response;
+      return left(new AppError.UnexpectedError(err)) as CreateGamesResponse;
     }
   }
 }

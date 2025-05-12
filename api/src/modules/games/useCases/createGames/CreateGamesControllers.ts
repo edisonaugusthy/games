@@ -1,21 +1,21 @@
-import { CreateGameUseCase } from './CreateGame';
-import { CreateGameDTO } from './CreateGameDTO';
+import { CreateGamesUseCase } from './CreateGames';
+import { CreateGamesDTO } from './CreateGamesDTO';
 import { BaseController } from '../../../../shared/infra/http/models/BaseController';
 import { TextUtils } from '../../../../shared/utils/TextUtils';
 
 import * as express from 'express';
-import { CreateGameErrors } from './CreateGameErrors';
+import { CreateGameErrors } from './CreateGamesErrors';
 
-export class CreateGameController extends BaseController {
-  private useCase: CreateGameUseCase;
+export class CreateGamesController extends BaseController {
+  private useCase: CreateGamesUseCase;
 
-  constructor(useCase: CreateGameUseCase) {
+  constructor(useCase: CreateGamesUseCase) {
     super();
     this.useCase = useCase;
   }
 
   async executeImpl(req: express.Request, res: express.Response): Promise<any> {
-    let dto: CreateGameDTO[] = req.body as CreateGameDTO[];
+    let dto: CreateGamesDTO[] = req.body as CreateGamesDTO[];
     if (dto?.length > 0) {
       const sanitizedValues = dto.map(game => {
         return {
