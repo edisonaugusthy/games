@@ -5,14 +5,17 @@
 
 #### Feature that could be added(missed due to time constraints)
 
-- Swagger documentaion
-- Nx for shareing models
+- Swagger documentation
+- Nx for sharing models
 - Redis to cache data
 - Loggers
 - Docker
-- Authentication and authorisation
+- Authentication and authorization
 - Testcases
 - Pagination/virtual Scroll
+- Better validations on UI and Backend
+- Better use of cloud functions and its rules
+- Better handling of the environment variables
 
 ## Documentation
 
