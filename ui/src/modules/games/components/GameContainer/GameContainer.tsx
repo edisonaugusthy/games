@@ -8,20 +8,14 @@ interface GameContainerProps {
 
 const GameContainer: React.FC<GameContainerProps> = ({ games, OnDelete }) => {
   return (
-    <>
-      {games.length === 0 ? (
-        <p>No games available</p>
-      ) : (
-        <div className="games-list">
-          {games.map(game => (
-            <GameCard
-              game={game}
-              OnDelete={OnDelete}
-            />
-          ))}
-        </div>
-      )}
-    </>
+    <div className="games-list">
+      {games.map(game => (
+        <GameCard
+          game={game}
+          OnDelete={OnDelete}
+        />
+      ))}
+    </div>
   );
 };
 
