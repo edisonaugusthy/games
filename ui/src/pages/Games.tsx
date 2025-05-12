@@ -5,6 +5,7 @@ import { getGames } from '../modules/games/services/GetGames';
 import { FullPageLoader } from '../shared/components/loader';
 import { Game } from '../modules/games/models/Game';
 import { gameService } from '../modules/games/services';
+import { Empty } from 'antd';
 
 const GamePage = () => {
   let { games, isLoading, isError, mutate } = getGames();
@@ -16,23 +17,13 @@ const GamePage = () => {
   };
   return (
     <Layout>
-      <div className="header-container flex flex-row flex-center flex-even">
-        <Header
-          title="All games"
-          subtitle=""
-        />
-      </div>
+      <Header
+        title="All games"
+        subtitle=""
+      />
       {isLoading && <FullPageLoader />}
-      {isError && (
-        <div className="error-container">
-          <p className="error-message">Failed to load games. Please try again later.</p>
-        </div>
-      )}
-      {!isLoading && !isError && games?.length === 0 && (
-        <div className="empty-state">
-          <p>No games available in the collection.</p>
-        </div>
-      )}
+      {isError && <p>Failed to load games. Please try again later.</p>}
+      {!isLoading && !isError && games?.length === 0 && <Empty />}
       {!isLoading && !isError && games && games?.length > 0 && (
         <GameContainer
           games={games}
