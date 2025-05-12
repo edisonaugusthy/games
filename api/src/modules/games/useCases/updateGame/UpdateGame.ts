@@ -20,34 +20,34 @@ export class UpdateGameUseCase implements UseCase<UpdateGameDTO, Promise<Respons
   }
 
   async execute(request: UpdateGameDTO): Promise<Response> {
-    let game: Game;
-    try {
-      const idOrError = GameId.create(new UniqueEntityID(request.gameId)).getValue();
-      game = await this.gameRepo.getOneById(idOrError);
-    } catch (err) {
+    let game: Game | null;
+
+    const idOrError = GameId.create(new UniqueEntityID(request.gameId)).getValue();
+    game = await this.gameRepo.getOneById(idOrError);
+    if (game) {
+      const nameOrError = GameName.create({ name: request.name });
+      const publisherOrError = GamePublisherName.create({
+        name: request.publisher
+      });
+      const gameTypeOrError = Guard.isOneOf(request.type, [GameType.BaseGame, GameType.Expansion], 'GameType');
+      const dtoResult = Result.combine([nameOrError, publisherOrError, gameTypeOrError]);
+      if (dtoResult.isFailure) {
+        return left(Result.fail<void>(dtoResult.getErrorValue())) as Response;
+      }
+
+      const name: GameName = nameOrError.getValue();
+      const publisher: GamePublisherName = publisherOrError.getValue();
+      game.updateName(name);
+      game.updateType(request.type as GameType);
+      game.updatePublisher(publisher);
+      try {
+        await this.gameRepo.updateOneById(game);
+        return right(Result.ok<void>());
+      } catch (error) {
+        return left(new AppError.UnexpectedError(error)) as Response;
+      }
+    } else {
       return left(new EditGameErrors.GameNotFoundError(request.name));
-    }
-
-    const nameOrError = GameName.create({ name: request.name });
-    const publisherOrError = GamePublisherName.create({
-      name: request.publisher
-    });
-    const gameTypeOrError = Guard.isOneOf(request.type, [GameType.BaseGame, GameType.Expansion], 'GameType');
-    const dtoResult = Result.combine([nameOrError, publisherOrError, gameTypeOrError]);
-    if (dtoResult.isFailure) {
-      return left(Result.fail<void>(dtoResult.getErrorValue())) as Response;
-    }
-
-    const name: GameName = nameOrError.getValue();
-    const publisher: GamePublisherName = publisherOrError.getValue();
-    game.updateName(name);
-    game.updateType(request.type as GameType);
-    game.updatePublisher(publisher);
-    try {
-      await this.gameRepo.updateOneById(game);
-      return right(Result.ok<void>());
-    } catch (error) {
-      return left(new AppError.UnexpectedError(error)) as Response;
     }
   }
 }

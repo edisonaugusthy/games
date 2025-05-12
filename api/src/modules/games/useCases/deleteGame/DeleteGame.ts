@@ -20,6 +20,7 @@ export class DeleteGameUseCase implements UseCase<DeleteGameDTO, Promise<Respons
     try {
       const idOrError = GameId.create(new UniqueEntityID(request.gameId)).getValue();
       const game = await this.gameRepo.getOneById(idOrError);
+      console.log(game);
       const gameFound = !!game;
       if (!gameFound) {
         return left(new DeleteGameErrors.GameNotFoundError(request.gameId));

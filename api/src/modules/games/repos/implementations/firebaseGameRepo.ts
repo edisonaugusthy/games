@@ -49,12 +49,12 @@ export class FirebaseGameRepo implements IGameRepo {
     return games;
   }
 
-  async getOneById(gameId: GameId): Promise<Game> {
+  async getOneById(gameId: GameId): Promise<Game | null> {
     const collectionRef = collection(filestoreDb, this.collectionName);
     const q = query(collectionRef, where('id', '==', gameId.getValue().toString()));
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
-      throw new Error(`Game with id ${gameId.getValue()} not found`);
+      return null;
     }
     const gameDoc = querySnapshot.docs[0];
     const game = GameMap.toDomain(gameDoc.data());

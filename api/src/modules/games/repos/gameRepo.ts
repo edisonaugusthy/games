@@ -4,7 +4,7 @@ import { GameName } from '../domain/gameName';
 
 export interface IGameRepo {
   exists(gameName: GameName): Promise<boolean>;
-  getOneById(gameId: GameId): Promise<Game>;
+  getOneById(gameId: GameId): Promise<Game | null>;
   bulkSave(games: Game[]): Promise<void>;
   getAll(): Promise<Game[]>;
   updateOneById(games: Game): Promise<void>;

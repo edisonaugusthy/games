@@ -1,0 +1,300 @@
+{
+  "info": {
+    "_postman_id": "67cf2303-129c-4b8d-b0ef-c53106ef8c08",
+    "name": "softGames",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29016473"
+  },
+  "item": [
+    {
+      "name": "healthCheck",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseurl}}",
+          "host": ["{{baseurl}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "bulk Add",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  \n    {\n        \"id\": \"2\",\n        \"name\": \"Catan: Seafarers\",\n        \"players\": {\n            \"min\": 3,\n            \"max\": 4\n        },\n        \"publisher\": \"Kosmos\",\n        \"baseGame\": \"1\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"3\",\n        \"name\": \"Catan: Cities & Knights\",\n        \"releaseYear\": 1998,\n        \"players\": {\n            \"min\": 3,\n            \"max\": 4\n        },\n        \"publisher\": \"Kosmos\",\n        \"baseGame\": \"1\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"4\",\n        \"name\": \"Ticket to Ride\",\n        \"players\": {\n            \"min\": 2,\n            \"max\": 5\n        },\n        \"publisher\": \"Days of Wonder\",\n        \"expansions\": [\n            \"5\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"5\",\n        \"name\": \"Ticket to Ride: Europe\",\n        \"releaseYear\": 2005,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 5\n        },\n        \"publisher\": \"Days of Wonder\",\n        \"baseGame\": \"4\",\n        \"standalone\": true,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"6\",\n        \"name\": \"Pandemic\",\n        \"releaseYear\": 2008,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 4\n        },\n        \"publisher\": \"Z-Man Games\",\n        \"expansions\": [\n            \"7\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"7\",\n        \"name\": \"Pandemic: On the Brink\",\n        \"releaseYear\": 2009,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 5\n        },\n        \"publisher\": \"Stonemaier Games\",\n        \"baseGame\": \"6\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"8\",\n        \"name\": \"Dominion\",\n        \"releaseYear\": 2008,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 4\n        },\n        \"publisher\": \"Rio Grande Games\",\n        \"expansions\": [\n            \"9\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"9\",\n        \"name\": \"Dominion: Intrigue\",\n        \"players\": {\n            \"min\": 2,\n            \"max\": 4\n        },\n        \"publisher\": \"Rio Grande Games\",\n        \"baseGame\": \"8\",\n        \"standalone\": true,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"10\",\n        \"name\": \"7 Wonders\",\n        \"releaseYear\": 2010,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 7\n        },\n        \"publisher\": \"Repos Production\",\n        \"expansions\": [\n            \"11\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"11\",\n        \"name\": \"7 Wonders: Leaders\",\n        \"releaseYear\": 2011,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 7\n        },\n        \"publisher\": \"Repos Production\",\n        \"baseGame\": \"10\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"12\",\n        \"name\": \"Carcassonne\",\n        \"releaseYear\": 2000,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 5\n        },\n        \"publisher\": \"Hans im Glück\",\n        \"expansions\": [\n            \"13\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"13\",\n        \"name\": \"Carcassonne: Inns & Cathedrals\",\n        \"releaseYear\": 2001,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 5\n        },\n        \"publisher\": \"Hans im Glück\",\n        \"baseGame\": \"12\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"14\",\n        \"name\": \"Azul\",\n        \"releaseYear\": 2017,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 4\n        },\n        \"publisher\": \"Next Move Games\",\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"15\",\n        \"name\": \"Azul: Stained Glass of Sintra\",\n        \"releaseYear\": 2018,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 4\n        },\n        \"baseGame\": \"14\",\n        \"publisher\": \"Stonemaier Games\",\n        \"standalone\": true,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"16\",\n        \"name\": \"Cartographers: A Roll Player Tale\",\n        \"releaseYear\": 2019,\n        \"players\": {\n            \"min\": 1\n        },\n        \"publisher\": \"Thunderworks Games\",\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"17\",\n        \"name\": \"Wingspan\",\n        \"releaseYear\": 2019,\n        \"players\": {\n            \"min\": 1,\n            \"max\": 5\n        },\n        \"publisher\": \"Stonemaier Games\",\n        \"expansions\": [\n            \"18\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"18\",\n        \"name\": \"Wingspan: European Expansion\",\n        \"releaseYear\": 2019,\n        \"players\": {\n            \"min\": 1,\n            \"max\": 5\n        },\n        \"publisher\": \"Stonemaier Games\",\n        \"baseGame\": \"17\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"19\",\n        \"name\": \"Gloomhaven\",\n        \"releaseYear\": 2017,\n        \"players\": {\n            \"min\": 1,\n            \"max\": 4\n        },\n        \"publisher\": \"Cephalofair Games\",\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"20\",\n        \"name\": \"Spirit Island\",\n        \"releaseYear\": 2017,\n        \"players\": {\n            \"min\": 1,\n            \"max\": 4\n        },\n        \"publisher\": \"Greater Than Games\",\n        \"expansions\": [\n            \"21\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"21\",\n        \"name\": \"Spirit Island: Branch & Claw\",\n        \"releaseYear\": 2017,\n        \"players\": {\n            \"min\": 1,\n            \"max\": 4\n        },\n        \"publisher\": \"Greater Than Games\",\n        \"baseGame\": \"20\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"22\",\n        \"name\": \"The Crew: The Quest for Planet Nine\",\n        \"releaseYear\": 2019,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 5\n        },\n        \"publisher\": \"Kosmos\",\n        \"expansions\": [\n            \"23\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"23\",\n        \"name\": \"The Crew: Mission Deep Sea\",\n        \"releaseYear\": 2021,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 5\n        },\n        \"publisher\": \"Kosmos\",\n        \"baseGame\": \"22\",\n        \"standalone\": true,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"24\",\n        \"name\": \"Root\",\n        \"releaseYear\": 2018,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 4\n        },\n        \"publisher\": \"Leder Games\",\n        \"expansions\": [\n            \"25\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"25\",\n        \"name\": \"Root: The Riverfolk Expansion\",\n        \"releaseYear\": 2018,\n        \"players\": {\n            \"min\": 2,\n            \"max\": 6\n        },\n        \"publisher\": \"Leder Games\",\n        \"baseGame\": \"24\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    },\n    {\n        \"id\": \"26\",\n        \"name\": \"Scythe\",\n        \"releaseYear\": 2016,\n        \"players\": {\n            \"min\": 1,\n            \"max\": 7\n        },\n        \"publisher\": \"Stonemaier Games\",\n        \"expansions\": [\n            \"27\"\n        ],\n        \"type\": \"BaseGame\"\n    },\n    {\n        \"id\": \"27\",\n        \"name\": \"Scythe: The Wind Gambit\",\n        \"releaseYear\": 2017,\n        \"players\": {\n            \"min\": 1,\n            \"max\": 7\n        },\n        \"baseGame\": \"26\",\n         \"publisher\": \"Stonemaier Games\",\n        \"standalone\": false,\n        \"type\": \"Expansion\"\n    }\n]\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseurl}}/game/bulk",
+          "host": ["{{baseurl}}"],
+          "path": ["game", "bulk"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get All",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseurl}}/game",
+          "host": ["{{baseurl}}"],
+          "path": ["game"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update game",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Accept-Language",
+            "value": "en-US,en;q=0.9,ml;q=0.8"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "DNT",
+            "value": "1"
+          },
+          {
+            "key": "Origin",
+            "value": "http://localhost:5173"
+          },
+          {
+            "key": "Referer",
+            "value": "http://localhost:5173/"
+          },
+          {
+            "key": "Sec-Fetch-Dest",
+            "value": "empty"
+          },
+          {
+            "key": "Sec-Fetch-Mode",
+            "value": "cors"
+          },
+          {
+            "key": "Sec-Fetch-Site",
+            "value": "same-site"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"136\", \"Google Chrome\";v=\"136\", \"Not.A/Brand\";v=\"99\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"gameId\":\"13\",\"name\":\"7 Wonders tester\",\"releaseYear\":\"2025-05-11T23:14:03.086Z\",\"players\":{\"min\":2,\"max\":7},\"publisher\":\"Repos Production\",\"expansions\":[\"11\"],\"type\":\"BaseGame\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseurl}}/game",
+          "host": ["{{baseurl}}"],
+          "path": ["game"]
+        },
+        "description": "Generated from cURL: curl 'http://localhost:5001/api/v1/game' \\\n  -X 'PUT' \\\n  -H 'Accept: */*' \\\n  -H 'Accept-Language: en-US,en;q=0.9,ml;q=0.8' \\\n  -H 'Connection: keep-alive' \\\n  -H 'Content-Type: application/json' \\\n  -H 'DNT: 1' \\\n  -H 'Origin: http://localhost:5173' \\\n  -H 'Referer: http://localhost:5173/' \\\n  -H 'Sec-Fetch-Dest: empty' \\\n  -H 'Sec-Fetch-Mode: cors' \\\n  -H 'Sec-Fetch-Site: same-site' \\\n  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"136\", \"Google Chrome\";v=\"136\", \"Not.A/Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  --data-raw '{\"gameId\":\"10\",\"name\":\"7 Wonders tester\",\"releaseYear\":\"2025-05-11T23:14:03.086Z\",\"players\":{\"min\":2,\"max\":7},\"publisher\":\"Repos Production\",\"expansions\":[\"11\"],\"type\":\"BaseGame\"}'"
+      },
+      "response": []
+    },
+    {
+      "name": "delete game",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Accept-Language",
+            "value": "en-US,en;q=0.9,ml;q=0.8"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "DNT",
+            "value": "1"
+          },
+          {
+            "key": "Origin",
+            "value": "http://localhost:5173"
+          },
+          {
+            "key": "Referer",
+            "value": "http://localhost:5173/"
+          },
+          {
+            "key": "Sec-Fetch-Dest",
+            "value": "empty"
+          },
+          {
+            "key": "Sec-Fetch-Mode",
+            "value": "cors"
+          },
+          {
+            "key": "Sec-Fetch-Site",
+            "value": "same-site"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"136\", \"Google Chrome\";v=\"136\", \"Not.A/Brand\";v=\"99\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5001/api/v1/game/10",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "v1", "game", "10"]
+        },
+        "description": "Generated from cURL: curl 'http://localhost:5001/api/v1/game/10' \\\n  -X 'DELETE' \\\n  -H 'Accept: */*' \\\n  -H 'Accept-Language: en-US,en;q=0.9,ml;q=0.8' \\\n  -H 'Connection: keep-alive' \\\n  -H 'DNT: 1' \\\n  -H 'Origin: http://localhost:5173' \\\n  -H 'Referer: http://localhost:5173/' \\\n  -H 'Sec-Fetch-Dest: empty' \\\n  -H 'Sec-Fetch-Mode: cors' \\\n  -H 'Sec-Fetch-Site: same-site' \\\n  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"136\", \"Google Chrome\";v=\"136\", \"Not.A/Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"'"
+      },
+      "response": []
+    },
+    {
+      "name": "create game",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Accept-Language",
+            "value": "en-US,en;q=0.9,ml;q=0.8"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "DNT",
+            "value": "1"
+          },
+          {
+            "key": "Origin",
+            "value": "http://localhost:5173"
+          },
+          {
+            "key": "Referer",
+            "value": "http://localhost:5173/"
+          },
+          {
+            "key": "Sec-Fetch-Dest",
+            "value": "empty"
+          },
+          {
+            "key": "Sec-Fetch-Mode",
+            "value": "cors"
+          },
+          {
+            "key": "Sec-Fetch-Site",
+            "value": "same-site"
+          },
+          {
+            "key": "User-Agent",
+            "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+          },
+          {
+            "key": "sec-ch-ua",
+            "value": "\"Chromium\";v=\"136\", \"Google Chrome\";v=\"136\", \"Not.A/Brand\";v=\"99\""
+          },
+          {
+            "key": "sec-ch-ua-mobile",
+            "value": "?0"
+          },
+          {
+            "key": "sec-ch-ua-platform",
+            "value": "\"macOS\""
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\":\"tesint new game\",\"publisher\":\"roy\",\"type\":\"Expansion\",\"releaseYear\":\"2029-05-11T22:00:00.000Z\",\"players\":{\"min\":1,\"max\":1}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5001/api/v1/game",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "v1", "game"]
+        },
+        "description": "Generated from cURL: curl 'http://localhost:5001/api/v1/game' \\\n  -H 'Accept: */*' \\\n  -H 'Accept-Language: en-US,en;q=0.9,ml;q=0.8' \\\n  -H 'Connection: keep-alive' \\\n  -H 'Content-Type: application/json' \\\n  -H 'DNT: 1' \\\n  -H 'Origin: http://localhost:5173' \\\n  -H 'Referer: http://localhost:5173/' \\\n  -H 'Sec-Fetch-Dest: empty' \\\n  -H 'Sec-Fetch-Mode: cors' \\\n  -H 'Sec-Fetch-Site: same-site' \\\n  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36' \\\n  -H 'sec-ch-ua: \"Chromium\";v=\"136\", \"Google Chrome\";v=\"136\", \"Not.A/Brand\";v=\"99\"' \\\n  -H 'sec-ch-ua-mobile: ?0' \\\n  -H 'sec-ch-ua-platform: \"macOS\"' \\\n  --data-raw '{\"name\":\"tesint new game\",\"publisher\":\"roy\",\"type\":\"Expansion\",\"releaseYear\":\"2029-05-11T22:00:00.000Z\",\"players\":{\"min\":1,\"max\":1}}'"
+      },
+      "response": []
+    }
+  ]
+}
