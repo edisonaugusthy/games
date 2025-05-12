@@ -39,7 +39,7 @@ export class CreateGamesController extends BaseController {
               return this.fail(res, error.getValue());
           }
         } else {
-          return this.ok(res);
+          return this.created(res);
         }
       } catch (err) {
         return this.fail(res, err as string);

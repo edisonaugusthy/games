@@ -18,6 +18,7 @@
 - Better use of cloud functions and its rules
 - Better handling of the environment variables
 - Class and Usecase diagrams
+- UI style polish
 
 ## Documentation
 
@@ -26,3 +27,7 @@
 - Navigate to API
 - Run `npm run dev`
 - Goto browser and open [http://localhost:5173](http://localhost:5173)
+
+#### Note
+
+> i have added

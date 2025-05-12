@@ -29,7 +29,7 @@ export class UpdateGameController extends BaseController {
         const error = result.value;
         switch (error.constructor) {
           case EditGameErrors.GameNotFoundError:
-            return this.conflict(res, error.getErrorValue().message);
+            return this.notFound(res, error.getErrorValue().message);
           default:
             return this.fail(res, error.getValue());
         }
