@@ -15,6 +15,15 @@ export class FirebaseGameRepo implements IGameRepo {
     return docs.size > 0;
   }
 
+  async save(game: Game): Promise<void> {
+    const batch = writeBatch(filestoreDb);
+    const persistedGame = await GameMap.toPersistence(game);
+    const docRef = doc(filestoreDb, this.collectionName, persistedGame.id);
+    batch.set(docRef, persistedGame);
+    await batch.commit();
+    return;
+  }
+
   async bulkSave(games: Game[]): Promise<void> {
     const batch = writeBatch(filestoreDb);
     for (const game of games) {

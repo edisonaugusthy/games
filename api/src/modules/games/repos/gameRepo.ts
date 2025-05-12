@@ -9,4 +9,5 @@ export interface IGameRepo {
   getAll(): Promise<Game[]>;
   updateOneById(games: Game): Promise<void>;
   deleteById(gameId: GameId): Promise<void>;
+  save(game: Game): Promise<void>;
 }

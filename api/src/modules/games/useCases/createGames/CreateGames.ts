@@ -1,7 +1,7 @@
 import { Result, left, right } from '../../../../shared/core/Result';
 import { AppError } from '../../../../shared/core/AppError';
 import { UseCase } from '../../../../shared/core/UseCase';
-import { CreateGameErrors } from './CreateGamesErrors';
+import { CreateGamesErrors } from './CreateGamesErrors';
 import { CreateGamesDTO } from './CreateGamesDTO';
 import { GameName } from '../../domain/gameName';
 import { GamePublisherName } from '../../domain/gamePublisher';
@@ -35,7 +35,7 @@ export class CreateGamesUseCase implements UseCase<CreateGamesDTO[], Promise<Cre
       const gameAlreadyExists = await this.gameRepo.exists(name);
 
       if (gameAlreadyExists) {
-        return left(new CreateGameErrors.GameAlreadyExistsError(name.value)) as CreateGamesResponse;
+        return left(new CreateGamesErrors.GameAlreadyExistsError(name.value)) as CreateGamesResponse;
       }
       const gameOrError: Result<Game> = Game.create(
         {

@@ -4,7 +4,7 @@ import { BaseController } from '../../../../shared/infra/http/models/BaseControl
 import { TextUtils } from '../../../../shared/utils/TextUtils';
 
 import * as express from 'express';
-import { CreateGameErrors } from './CreateGamesErrors';
+import { CreateGamesErrors } from './CreateGamesErrors';
 
 export class CreateGamesController extends BaseController {
   private useCase: CreateGamesUseCase;
@@ -31,9 +31,9 @@ export class CreateGamesController extends BaseController {
         if (result.isLeft()) {
           const error = result.value;
           switch (error.constructor) {
-            case CreateGameErrors.GameAlreadyExistsError:
+            case CreateGamesErrors.GameAlreadyExistsError:
               return this.conflict(res, error.getErrorValue().message);
-            case CreateGameErrors.GameNameAlreadyTakenError:
+            case CreateGamesErrors.GameNameAlreadyTakenError:
               return this.conflict(res, error.getErrorValue().message);
             default:
               return this.fail(res, error.getValue());
