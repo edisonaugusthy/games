@@ -1,7 +1,7 @@
 ### Features
 
 - Microservice ready architecture with Domain Driven Design Principles
-- Separation between layers which enable make future changes easily
+- Separation between Layers which enable make future changes easily
 - Swr package for efficient data fetching
 
 #### Feature that could be added(missed due to time constraints)
@@ -14,7 +14,7 @@
 - Authentication and authorization
 - Testcases
 - Pagination/virtual Scroll
-- Better validations on UI and Backend
+- Better validations on UI(forms) and Backend
 - Better use of cloud functions and its rules
 - Better handling of the environment variables
 - Class and Usecase diagrams
@@ -30,4 +30,4 @@
 
 #### Note
 
-> i have added
+> i have included my firebase app credentials.feel free to use yours if needed.
