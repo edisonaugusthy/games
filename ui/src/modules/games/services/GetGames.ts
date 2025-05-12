@@ -4,10 +4,11 @@ import { fetcher } from '../../../shared/utils/fetcher';
 import { Game } from '../models/Game';
 
 export function getGames() {
-  const { data, error, isLoading } = useSWR<{ games: Game[] }>(`${apiConfig.baseUrl}/game`, fetcher);
+  const { data, error, isLoading, mutate } = useSWR<{ games: Game[] }>(`${apiConfig.baseUrl}/game`, fetcher);
   return {
     games: data?.games,
     isLoading,
-    isError: error
+    isError: error,
+    mutate
   };
 }

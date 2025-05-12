@@ -3,9 +3,10 @@ import GameCard from '../GameCard/GameCard';
 import './GameContainer.scss';
 interface GameContainerProps {
   games: Game[];
+  OnDelete: (game: Game) => void;
 }
 
-const GameContainer: React.FC<GameContainerProps> = ({ games }) => {
+const GameContainer: React.FC<GameContainerProps> = ({ games, OnDelete }) => {
   return (
     <>
       {games.length === 0 ? (
@@ -13,7 +14,10 @@ const GameContainer: React.FC<GameContainerProps> = ({ games }) => {
       ) : (
         <div className="games-list">
           {games.map(game => (
-            <GameCard game={game} />
+            <GameCard
+              game={game}
+              OnDelete={OnDelete}
+            />
           ))}
         </div>
       )}

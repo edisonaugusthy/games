@@ -13,7 +13,7 @@ export class DeleteGameController extends BaseController {
   }
 
   async executeImpl(req: express.Request, res: express.Response): Promise<any> {
-    const dto: DeleteGameDTO = req.body as DeleteGameDTO;
+    const dto: DeleteGameDTO = { gameId: req.params.gameId };
 
     try {
       const result = await this.useCase.execute(dto);

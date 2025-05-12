@@ -3,9 +3,17 @@ import Header from '../shared/components/header/Header';
 import GameContainer from '../modules/games/components/GameContainer/GameContainer';
 import { getGames } from '../modules/games/services/GetGames';
 import { FullPageLoader } from '../shared/components/loader';
+import { Game } from '../modules/games/models/Game';
+import { gameService } from '../modules/games/services';
 
 const GamePage = () => {
-  const { games, isLoading, isError } = getGames();
+  let { games, isLoading, isError, mutate } = getGames();
+  const OnDelete = async (game: Game) => {
+    const result = await gameService.deleteGameById(game);
+    if (result.isRight()) {
+      mutate();
+    }
+  };
   return (
     <Layout>
       <div className="header-container flex flex-row flex-center flex-even">
@@ -25,7 +33,12 @@ const GamePage = () => {
           <p>No games available in the collection.</p>
         </div>
       )}
-      {!isLoading && !isError && games && games?.length > 0 && <GameContainer games={games} />}
+      {!isLoading && !isError && games && games?.length > 0 && (
+        <GameContainer
+          games={games}
+          OnDelete={OnDelete}
+        />
+      )}
     </Layout>
   );
 };

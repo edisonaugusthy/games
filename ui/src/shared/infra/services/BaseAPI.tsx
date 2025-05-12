@@ -39,4 +39,14 @@ export abstract class BaseAPI {
       headers: headers ? headers : null
     });
   }
+
+  protected delete(url: string, data?: any, params?: any, headers?: any): Promise<any> {
+    return this.axiosInstance({
+      method: 'DELETE',
+      url: `${this.baseUrl}${url}`,
+      data: data ? data : null,
+      params: params ? params : null,
+      headers: headers ? headers : null
+    });
+  }
 }

@@ -7,6 +7,7 @@ import { Game } from '../models/Game';
 export interface IGameService {
   getAllGames(): Promise<Game[]>;
   createGame(game: Game): Promise<APIResponse<void>>;
+  deleteGameById(game: Game): Promise<APIResponse<void>>;
 }
 
 export class GameService extends BaseAPI implements IGameService {
@@ -18,6 +19,14 @@ export class GameService extends BaseAPI implements IGameService {
   async createGame(game: Game): Promise<APIResponse<void>> {
     try {
       await this.post('/game', game);
+      return right(Result.ok<void>());
+    } catch (err: any) {
+      return left(err.response ? err.response.data.message : 'Connection failed');
+    }
+  }
+  async deleteGameById(game: Game): Promise<APIResponse<void>> {
+    try {
+      await this.delete(`/game/${game.gameId}`);
       return right(Result.ok<void>());
     } catch (err: any) {
       return left(err.response ? err.response.data.message : 'Connection failed');

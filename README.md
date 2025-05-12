@@ -12,6 +12,7 @@
 - Docker
 - Authentication and authorisation
 - Testcases
+- Pagination/virtual Scroll
 
 ## Documentation
 
