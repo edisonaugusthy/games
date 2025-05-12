@@ -5,15 +5,17 @@ import { getGames } from '../modules/games/services/GetGames';
 import { FullPageLoader } from '../shared/components/loader';
 import { Game } from '../modules/games/models/Game';
 import { gameService } from '../modules/games/services';
-import { Empty, message } from 'antd';
+import { Empty, message, Button } from 'antd';
 import EditGamePopup from '../modules/games/components/EditGame/EditGame';
 import { useState } from 'react';
+import AddGameModal from '../modules/games/components/AddGame/AddGameModal/AddGameModal';
 
 const GamePage = () => {
   let { games, isLoading, isError, mutate } = getGames();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const OnDelete = async (game: Game) => {
     try {
       const result = await gameService.deleteGameById(game);
@@ -53,6 +55,17 @@ const GamePage = () => {
     setIsEditModalOpen(false);
     setSelectedGame(null);
   };
+  const handleOpenAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+
+  const handleCancelAdd = () => {
+    setIsAddModalOpen(false);
+  };
+
+  const handleAddSuccess = () => {
+    mutate();
+  };
 
   return (
     <Layout>
@@ -60,6 +73,12 @@ const GamePage = () => {
         title="All games"
         subtitle=""
       />
+      <Button
+        type="primary"
+        onClick={handleOpenAddModal}
+        className="add-game-button">
+        Add New Game
+      </Button>
       {isLoading && <FullPageLoader />}
       {isError && <p>Failed to load games. Please try again later.</p>}
       {!isLoading && !isError && games?.length === 0 && <Empty />}
@@ -79,6 +98,11 @@ const GamePage = () => {
           isSubmitting={isSubmitting}
         />
       )}
+      <AddGameModal
+        isModalOpen={isAddModalOpen}
+        handleCancel={handleCancelAdd}
+        onSuccess={handleAddSuccess}
+      />
     </Layout>
   );
 };

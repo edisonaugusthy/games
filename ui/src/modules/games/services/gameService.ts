@@ -6,7 +6,7 @@ import { Game } from '../models/Game';
 
 export interface IGameService {
   getAllGames(): Promise<Game[]>;
-  createGame(game: Game): Promise<APIResponse<void>>;
+  createGame(game: Partial<Game>): Promise<APIResponse<void>>;
   deleteGameById(game: Game): Promise<APIResponse<void>>;
   updateGame(game: Game): Promise<APIResponse<void>>;
 }
@@ -17,7 +17,7 @@ export class GameService extends BaseAPI implements IGameService {
     return response.data as Game[];
   }
 
-  async createGame(game: Game): Promise<APIResponse<void>> {
+  async createGame(game: Partial<Game>): Promise<APIResponse<void>> {
     try {
       await this.post('/game', game);
       return right(Result.ok<void>());
