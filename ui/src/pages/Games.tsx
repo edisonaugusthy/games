@@ -5,7 +5,7 @@ import { getGames } from '../modules/games/services/GetGames';
 import { FullPageLoader } from '../shared/components/loader';
 import { Game } from '../modules/games/models/Game';
 import { gameService } from '../modules/games/services';
-import { Empty, message, Button } from 'antd';
+import { Empty, message, Button, Col, Row } from 'antd';
 import EditGamePopup from '../modules/games/components/EditGame/EditGame';
 import { useState } from 'react';
 import AddGameModal from '../modules/games/components/AddGame/AddGameModal/AddGameModal';
@@ -73,12 +73,17 @@ const GamePage = () => {
         title="All games"
         subtitle=""
       />
-      <Button
-        type="primary"
-        onClick={handleOpenAddModal}
-        className="add-game-button">
-        Add New Game
-      </Button>
+      <Row>
+        <Col span={21}></Col>
+        <Col span={2}>
+          <Button
+            type="primary"
+            onClick={handleOpenAddModal}>
+            Add New Game
+          </Button>
+        </Col>
+      </Row>
+
       {isLoading && <FullPageLoader />}
       {isError && <p>Failed to load games. Please try again later.</p>}
       {!isLoading && !isError && games?.length === 0 && <Empty />}
